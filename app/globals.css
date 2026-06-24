@@ -1,0 +1,143 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@source "../app/**/*.{ts,tsx}";
+@source "../components/**/*.{ts,tsx}";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-heading: var(--font-space-grotesk), 'Geist Fallback';
+  --font-sans: var(--font-inter), 'Geist Fallback';
+  --font-mono: var(--font-space-grotesk), 'Geist Mono Fallback';
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-gold: var(--gold);
+  --color-gold-foreground: var(--gold-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+:root,
+.dark {
+  color-scheme: dark;
+  /* Deep black base */
+  --background: oklch(0.13 0.004 250);
+  --foreground: oklch(0.97 0 0);
+  /* Slightly raised surface for cards */
+  --card: oklch(0.17 0.005 260);
+  --card-foreground: oklch(0.97 0 0);
+  --popover: oklch(0.15 0.005 260);
+  --popover-foreground: oklch(0.97 0 0);
+  /* Bold red */
+  --primary: oklch(0.57 0.22 26);
+  --primary-foreground: oklch(0.98 0 0);
+  /* Silver-tinted dark */
+  --secondary: oklch(0.24 0.005 260);
+  --secondary-foreground: oklch(0.97 0 0);
+  --muted: oklch(0.22 0.005 260);
+  --muted-foreground: oklch(0.68 0.01 260);
+  --accent: oklch(0.57 0.22 26);
+  --accent-foreground: oklch(0.98 0 0);
+  /* Metallic gold */
+  --gold: oklch(0.81 0.14 84);
+  --gold-foreground: oklch(0.16 0.01 80);
+  --destructive: oklch(0.57 0.22 26);
+  --border: oklch(0.28 0.006 260);
+  --input: oklch(0.26 0.006 260);
+  --ring: oklch(0.57 0.22 26);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+  .text-gold {
+    color: var(--gold);
+  }
+  .bg-gold {
+    background-color: var(--gold);
+  }
+  /* Cinematic film-grain / vignette helpers */
+  .text-balance {
+    text-wrap: balance;
+  }
+  .glow-red {
+    box-shadow: 0 0 0 1px color-mix(in oklch, var(--primary) 35%, transparent),
+      0 8px 40px -8px color-mix(in oklch, var(--primary) 55%, transparent);
+  }
+  .glow-gold {
+    box-shadow: 0 0 0 1px color-mix(in oklch, var(--gold) 40%, transparent),
+      0 8px 40px -10px color-mix(in oklch, var(--gold) 50%, transparent);
+  }
+  .text-stroke-gold {
+    -webkit-text-stroke: 1.5px var(--gold);
+    color: transparent;
+  }
+}
+
+/* Hide scrollbar for marquee rows */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+@keyframes equalize {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
