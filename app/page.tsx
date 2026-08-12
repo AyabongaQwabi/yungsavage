@@ -10,34 +10,59 @@ import { MovementSection } from '@/components/movement-section'
 import { SiteFooter } from '@/components/site-footer'
 import { CartSidebar } from '@/components/cart-sidebar'
 import { MiniPlayer } from '@/components/mini-player'
+import { SITE_URL, absoluteUrl } from '@/lib/seo'
+import { TRACKS } from '@/lib/album'
 
 const schemaData = {
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      "name": "YungSavage QTN Official Store",
+      "url": SITE_URL,
+      "publisher": { "@type": "MusicGroup", "@id": `${SITE_URL}/#artist` }
+    },
+    {
+      "@type": "Person",
+      "@id": `${SITE_URL}/#person`,
+      "name": "Siyamkela Kemka",
+      "alternateName": "YungSavage QTN",
+      "url": SITE_URL,
+      "jobTitle": "Recording Artist",
+      "nationality": "South African",
+      "birthPlace": {
+        "@type": "Place",
+        "name": "Queenstown, Eastern Cape, South Africa"
+      },
+      "memberOf": { "@type": "MusicGroup", "@id": `${SITE_URL}/#artist` }
+    },
+    {
       "@type": "MusicGroup",
-      "@id": "http://localhost:3000/#artist",
+      "@id": `${SITE_URL}/#artist`,
       "name": "YungSavage QTN",
       "alternateName": "Siyamkela Kemka",
+      "url": SITE_URL,
       "genre": ["South African Hip-Hop", "Kasi Rap"],
       "homeLocation": {
         "@type": "Place",
         "name": "Queenstown, Eastern Cape, South Africa"
       },
-      "image": "http://localhost:3000/images/artist-street.jpg",
+      "image": absoluteUrl('/images/artist-street.jpg'),
       "description": "Born Siyamkela Kemka in Queenstown, Eastern Cape, YungSavage QTN is a South African hip-hop artist delivering township reality and Royal Kasi Stories."
     },
     {
       "@type": "MusicAlbum",
-      "@id": "http://localhost:3000/#album",
+      "@id": `${SITE_URL}/#album`,
       "name": "INVASION",
+      "url": absoluteUrl('/#music'),
       "byArtist": {
         "@type": "MusicGroup",
-        "@id": "http://localhost:3000/#artist"
+        "@id": `${SITE_URL}/#artist`
       },
       "dateReleased": "2026-06-20",
       "numTracks": 13,
-      "image": "http://localhost:3000/images/invasion-cover-front.jpg",
+      "image": absoluteUrl('/images/invasion-cover-front.jpg'),
       "offers": {
         "@type": "AggregateOffer",
         "priceCurrency": "ZAR",
@@ -45,138 +70,25 @@ const schemaData = {
         "highPrice": "450",
         "offerCount": "17"
       },
-      "track": [
-        {
-          "@type": "MusicRecording",
-          "name": "They_Know",
-          "position": 1,
-          "offers": {
-            "@type": "Offer",
-            "price": "30",
-            "priceCurrency": "ZAR"
-          }
-        },
-        {
-          "@type": "MusicRecording",
-          "name": "Spirit Up",
-          "position": 2,
-          "offers": {
-            "@type": "Offer",
-            "price": "30",
-            "priceCurrency": "ZAR"
-          }
-        },
-        {
-          "@type": "MusicRecording",
-          "name": "Far",
-          "position": 3,
-          "offers": {
-            "@type": "Offer",
-            "price": "30",
-            "priceCurrency": "ZAR"
-          }
-        },
-        {
-          "@type": "MusicRecording",
-          "name": "Intaba",
-          "position": 4,
-          "offers": {
-            "@type": "Offer",
-            "price": "30",
-            "priceCurrency": "ZAR"
-          }
-        },
-        {
-          "@type": "MusicRecording",
-          "name": "Emazweni",
-          "position": 5,
-          "offers": {
-            "@type": "Offer",
-            "price": "30",
-            "priceCurrency": "ZAR"
-          }
-        },
-        {
-          "@type": "MusicRecording",
-          "name": "Oko",
-          "position": 6,
-          "offers": {
-            "@type": "Offer",
-            "price": "30",
-            "priceCurrency": "ZAR"
-          }
-        },
-        {
-          "@type": "MusicRecording",
-          "name": "Dont Worry",
-          "position": 7,
-          "offers": {
-            "@type": "Offer",
-            "price": "25",
-            "priceCurrency": "ZAR"
-          }
-        },
-        {
-          "@type": "MusicRecording",
-          "name": "Self Lxfe",
-          "position": 8,
-          "offers": {
-            "@type": "Offer",
-            "price": "25",
-            "priceCurrency": "ZAR"
-          }
-        },
-        {
-          "@type": "MusicRecording",
-          "name": "Siyababona",
-          "position": 9,
-          "offers": {
-            "@type": "Offer",
-            "price": "35",
-            "priceCurrency": "ZAR"
-          }
-        },
-        {
-          "@type": "MusicRecording",
-          "name": "eKasi",
-          "position": 10,
-          "offers": {
-            "@type": "Offer",
-            "price": "35",
-            "priceCurrency": "ZAR"
-          }
-        },
-        {
-          "@type": "MusicRecording",
-          "name": "Song To Remember",
-          "position": 11,
-          "offers": {
-            "@type": "Offer",
-            "price": "35",
-            "priceCurrency": "ZAR"
-          }
-        },
-        {
-          "@type": "MusicRecording",
-          "name": "For The Streets",
-          "position": 12,
-          "offers": {
-            "@type": "Offer",
-            "price": "30",
-            "priceCurrency": "ZAR"
-          }
-        },
-        {
-          "@type": "MusicRecording",
-          "name": "Put In Work",
-          "position": 13,
-          "offers": {
-            "@type": "Offer",
-            "price": "30",
-            "priceCurrency": "ZAR"
-          }
+      "track": TRACKS.map((track) => ({
+        "@type": "MusicRecording",
+        "@id": `${absoluteUrl(`/tracks/${track.id}`)}#track`,
+        "name": track.title,
+        "position": track.number,
+        "url": absoluteUrl(`/tracks/${track.id}`),
+        ...(track.feature && {
+          byArtist: [
+            { "@type": "MusicGroup", "@id": `${SITE_URL}/#artist` },
+            { "@type": "MusicArtist", name: track.feature },
+          ],
+        }),
+        "offers": {
+          "@type": "Offer",
+          "price": String(track.price),
+          "priceCurrency": "ZAR",
+          "url": absoluteUrl(`/tracks/${track.id}`),
         }
-      ]
+      }))
     },
     {
       "@type": "FAQPage",

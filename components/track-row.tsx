@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { Play, Pause, Plus, Check } from 'lucide-react'
 import { useState } from 'react'
 import { type Track, formatZAR } from '@/lib/album'
@@ -62,7 +63,12 @@ export function TrackRow({ track }: { track: Track }) {
             {String(track.number).padStart(2, '0')}
           </span>
           <h3 className="truncate font-heading text-base font-semibold text-foreground">
-            {track.title}
+            <Link
+              href={`/tracks/${track.id}`}
+              className="hover:text-primary hover:underline"
+            >
+              {track.title}
+            </Link>
           </h3>
           {track.tag && (
             <span className="rounded bg-gold/15 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-gold">
